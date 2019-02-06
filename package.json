@@ -1,6 +1,6 @@
 {
   "name": "serverless-plugin-cors-credential",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "serverless framework plugin for cors settings",
   "main": "src/index.js",
   "author": "hurou927",
