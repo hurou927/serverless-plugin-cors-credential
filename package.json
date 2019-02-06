@@ -7,5 +7,6 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.1.0"
-  }
+  },
+  "dependencies": {}
 }

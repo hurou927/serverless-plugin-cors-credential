@@ -1,7 +1,7 @@
 'use strict';
 
 
-class Deploy {
+class Plugin {
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options;
@@ -17,12 +17,8 @@ class Deploy {
       template: undefined,
       ...this.serverless.service.custom.cors
     };
-    // console.log(corsOptionSetting);
     if (corsOptionSetting.template) {
-      this.serverless.cli.log('[CUSTOM:SERVERLESS:PLUGIN]Set response mapping template to all OPTIONS methods');
-      this.serverless.cli.log('==========================================');
-      this.serverless.cli.log(corsOptionSetting.template);
-      this.serverless.cli.log('==========================================');
+      this.serverless.cli.log(`[serverless-plugin-cors-credential] set ResponseTemplate :: ${corsOptionSetting.template}`);
       Object.keys(resources)
         .filter(key => resources[key].Type === 'AWS::ApiGateway::Method')
         .filter(key => resources[key].Properties.HttpMethod === 'OPTIONS')
@@ -36,6 +32,4 @@ class Deploy {
   }
 }
 
-
-
-module.exports = Deploy;
+module.exports = Plugin;
