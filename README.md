@@ -57,7 +57,7 @@ custom:
 
 ## Tips
 
-API Gatway setting
+API Gateway setting
 
 cors + credential
 
