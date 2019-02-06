@@ -62,54 +62,55 @@ API Gatway setting
 cors + credential
 
 ```yaml
-template:
-  RequestValidator:
-    Type: 'AWS::ApiGateway::RequestValidator'
-    Properties:
-      Name: 'only-request'
-      RestApiId:
-        Ref: ApiGatewayRestApi
-      ValidateRequestBody: false
-      ValidateRequestParameters: true
-  BodyValidator:
-    Type: 'AWS::ApiGateway::RequestValidator'
-    Properties:
-      Name: 'only-body'
-      RestApiId:
-        Ref: ApiGatewayRestApi
-      ValidateRequestBody: true
-      ValidateRequestParameters: false
-  GatewayResponseDefault4XX:
-    Type: 'AWS::ApiGateway::GatewayResponse'
-    Properties:
-      ResponseParameters:
-        gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
-        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
-        gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
-      ResponseType: DEFAULT_4XX
-      RestApiId:
-        Ref: 'ApiGatewayRestApi'
-  GatewayResponseACCESSDENIED:
-    Type: 'AWS::ApiGateway::GatewayResponse'
-    Properties:
-      ResponseParameters:
-        gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
-        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
-        gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
-      ResponseType: ACCESS_DENIED
-      ResponseTemplates:
-        'application/json': |
-          {"error": $context.authorizer.authorizeError,"message":$context.error.messageString}
-      RestApiId:
-        Ref: 'ApiGatewayRestApi'
-  GatewayResponseDefault5XX:
-    Type: 'AWS::ApiGateway::GatewayResponse'
-    Properties:
-      ResponseParameters:
-        gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
-        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
-        gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
-      ResponseType: DEFAULT_5XX
-      RestApiId:
-        Ref: 'ApiGatewayRestApi'
+Resource:
+  resource:
+    RequestValidator:
+      Type: 'AWS::ApiGateway::RequestValidator'
+      Properties:
+        Name: 'only-request'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: false
+        ValidateRequestParameters: true
+    BodyValidator:
+      Type: 'AWS::ApiGateway::RequestValidator'
+      Properties:
+        Name: 'only-body'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true
+        ValidateRequestParameters: false
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+    GatewayResponseACCESSDENIED:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: ACCESS_DENIED
+        ResponseTemplates:
+          'application/json': |
+            {"error": $context.authorizer.authorizeError,"message":$context.error.messageString}
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+    GatewayResponseDefault5XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "method.request.header.origin"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
 ```
